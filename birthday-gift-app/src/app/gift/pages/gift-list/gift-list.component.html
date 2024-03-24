@@ -1,0 +1,38 @@
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+  "
+>
+  <button mat-raised-button color="accent" (click)="openDialog()">
+    Ajouter un cadeau
+  </button>
+</div>
+
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title> Nom du cadeau : </mat-panel-title>
+      <mat-panel-description>
+        test
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-panel-title> Description : </mat-panel-title>
+    <mat-panel-description>
+      test
+    </mat-panel-description>
+    <mat-panel-title> Lien : </mat-panel-title>
+    <mat-panel-description>
+      test
+    </mat-panel-description>
+    <mat-action-row>
+      <button mat-button color="primary" (click)="openDialog()">Modifier</button>
+      <button mat-button color="warn" (click)="confirmDelete()">Supprimer</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
