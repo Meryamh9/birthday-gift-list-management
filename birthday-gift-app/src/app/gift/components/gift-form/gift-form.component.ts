@@ -1,9 +1,10 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Gift } from './../../models/gift';
 import { Component, Inject } from '@angular/core';
 
 export interface GiftFormData{
+    // false
   isCreateForm: boolean;
   gift: Gift;
 }
@@ -13,21 +14,22 @@ export interface GiftFormData{
   styleUrls: ['./gift-form.component.scss']
 })
 export class GiftFormComponent {
-  giftForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    price: new FormControl(0, [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    link: new FormControl('', Validators.required)
+  giftForm = this.fb.group({
+    name: ['', [Validators.required]],
+    price: [0, [Validators.required]],
+    description: ['', [Validators.required]],
+    link: ['', [Validators.required]],
   });
-
-  constructor(public dialogRef: MatDialogRef<GiftFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: GiftFormData) {
-    if (this.data && !this.data.isCreateForm) {
+  constructor(
+    public dialogRef: MatDialogRef<GiftFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: GiftFormData,
+    private fb: FormBuilder,
+  ) {
+    if (!this.data.isCreateForm && this.data.gift) {
       this.setGiftForm(this.data.gift);
     }
   }
   
-
   setGiftForm(gift: Gift){
     this.giftForm.setValue({
       name: gift.name,
@@ -43,8 +45,13 @@ export class GiftFormComponent {
     }
     return 'Formulaire de modification';
   }
-  onSubmit(){
 
+  get submitBtnName(){
+    if(this.data.isCreateForm){
+      return 'Ajouter';
+    }
+    return 'Modifier';
   }
+
 
 }
