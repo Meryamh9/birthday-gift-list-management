@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GiftFormComponent } from '../../components/gift-form/gift-form.component';
 import { Gift } from '../../models/gift';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-gift-list',
@@ -16,7 +17,8 @@ export class GiftListComponent implements OnInit {
   gifts$!: Observable<Gift[]>;
 
   constructor(public dialog: MatDialog,
-    private giftService: GiftService
+    private giftService: GiftService,
+    private _snackBar: MatSnackBar
   ) {
 
   }
@@ -47,9 +49,17 @@ export class GiftListComponent implements OnInit {
       });
   }
 
-  confirmDelete() {
+  confirmDelete(id: number) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cet élément ?")) {
       // Mettez votre logique de suppression ici
+      this.giftService.delete(id)
+      .subscribe(result => {
+        this._snackBar.open(result, '', {
+          duration: 2000,
+          panelClass: ['bg-success']
+        });
+        this.fetchData();
+      });
       console.log('Suppression confirmée');
     } else {
       console.log('Suppression annulée');
