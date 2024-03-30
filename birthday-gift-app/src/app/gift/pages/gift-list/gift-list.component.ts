@@ -1,37 +1,50 @@
-import { Component } from '@angular/core';
+import { GiftService } from './../../services/gift.service';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GiftFormComponent } from '../../components/gift-form/gift-form.component';
 import { Gift } from '../../models/gift';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-gift-list',
   templateUrl: './gift-list.component.html',
   styleUrls: ['./gift-list.component.scss']
 })
-export class GiftListComponent {
+export class GiftListComponent implements OnInit {
   panelOpenState = false;
-  gifts: Gift[] = []; // Suppose que vous avez une liste de cadeaux
-  selectedGift: Gift | null = {
-    id: 1,
-    name: 'Cadeau 1',
-    price: 10,
-    description: 'Description du cadeau 1',
-    link: 'https://exemple.com/cadeau1'
-  };
 
-  constructor(public dialog: MatDialog) { }
+  gifts$!: Observable<Gift[]>;
 
-  openDialog(gift?: Gift) {
+  constructor(public dialog: MatDialog,
+    private giftService: GiftService
+  ) {
+
+  }
+
+  ngOnInit(): void {
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.gifts$ = this.giftService.get();
+  }
+
+  openGiftForm(gift?: Gift) {
     const dialogRef = this.dialog.open(GiftFormComponent, {
+      height: '85%',
+      width: '60%',
       data: {
-        isCreateForm: !gift,
-        gift: gift || undefined
+        isCreateForm: gift ? false : true,
+        gift: gift ? gift : undefined
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if (result) {
+          this.fetchData();
+        }
+      });
   }
 
   confirmDelete() {
@@ -42,4 +55,6 @@ export class GiftListComponent {
       console.log('Suppression annulée');
     }
   }
+
+
 }

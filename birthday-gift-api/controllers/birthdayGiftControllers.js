@@ -12,6 +12,7 @@ exports.insert = async (req, res) => {
         res.status(201).json({
             id: savedBirthdayGift.id,
             name: savedBirthdayGift.name,
+            price: savedBirthdayGift.price,
             description: savedBirthdayGift.description,
             link: savedBirthdayGift.link
         });
@@ -47,6 +48,7 @@ exports.update = async (req, res) => {
         res.json({
             id: updatedBirthdayGift.id,
             name: updatedBirthdayGift.name,
+            price: updatedBirthdayGift.price,
             description: updatedBirthdayGift.description,
             link: updatedBirthdayGift.link
         });

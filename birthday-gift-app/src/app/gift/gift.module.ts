@@ -16,7 +16,7 @@ import { GiftFormComponent } from './components/gift-form/gift-form.component';
   imports: [
     CommonModule,
     GiftRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class GiftModule { }

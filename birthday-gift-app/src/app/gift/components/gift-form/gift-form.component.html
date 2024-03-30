@@ -1,35 +1,32 @@
-<mat-dialog-content style="width: 50vw; max-width: 500px">
-  <h2 mat-dialog-title>{{title}}</h2>
-  <form [formGroup]="giftForm">
-    <div class="form">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Price</mat-label>
-        <input matInput formControlName="price" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-        <input matInput formControlName="description" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Link</mat-label>
-        <input matInput formControlName="link" />
-      </mat-form-field>
-    </div>
-  </form>
-</mat-dialog-content>
+<h2 mat-dialog-title>{{title}}</h2>
 
-<mat-dialog-actions align="end">
-  <button mat-raised-button color="primary">{{ submitBtnName }}</button>
-  <button
-    mat-raised-button
-    color="accent"
-    mat-dialog-close
-    [mat-dialog-close]="true"
-  >
-    Annuler
-  </button>
-</mat-dialog-actions>
+
+<form [formGroup]="giftForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input matInput formControlName="id" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Link</mat-label>
+      <input matInput formControlName="link" />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>Annuler</button>
+    <button mat-raised-button type="submit" cdkFocusInitial color="warn" [disabled]="!giftForm.valid || !giftForm.dirty">{{submitBtnName}}</button>
+  </mat-dialog-actions>
+</form>

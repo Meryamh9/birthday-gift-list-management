@@ -6,12 +6,14 @@
     height: 10vh;
   "
 >
-  <button mat-raised-button color="accent" (click)="openDialog()">
+  <button mat-raised-button color="accent" (click)="openGiftForm()">
     Ajouter un cadeau
   </button>
 </div>
 
-<mat-accordion>
+
+
+<mat-accordion *ngFor="let gift of gifts$ |async">
   <mat-expansion-panel
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false"
@@ -19,23 +21,23 @@
     <mat-expansion-panel-header>
       <mat-panel-title> Nom du cadeau : </mat-panel-title>
       <mat-panel-description>
-        test
+        {{gift.name}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-panel-title> Prix : </mat-panel-title>
     <mat-panel-description>
-      test
+      {{gift.price}}
     </mat-panel-description>
     <mat-panel-title> Description : </mat-panel-title>
     <mat-panel-description>
-      test
+      {{gift.description}}
     </mat-panel-description>
     <mat-panel-title> Lien : </mat-panel-title>
     <mat-panel-description>
-      test
+      {{gift.link}}
     </mat-panel-description>
     <mat-action-row>
-      <button mat-button color="primary" (click)="openDialog()">Modifier</button>
+      <button mat-button color="primary" (click)="openGiftForm(gift)">Modifier</button>
       <button mat-button color="warn" (click)="confirmDelete()">Supprimer</button>
     </mat-action-row>
   </mat-expansion-panel>
