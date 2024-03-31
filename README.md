@@ -19,7 +19,7 @@ Avant de commencer l'installation, assurez-vous d'avoir Docker et Docker Compose
 3. **Construisez les conteneurs Docker en utilisant Docker Compose :**
 
     ```bash
-    docker-compose up
+    docker compose up
     ```
 
    Cette commande va créer et démarrer les conteneurs pour le backend et le frontend, en les reliant ensemble.
