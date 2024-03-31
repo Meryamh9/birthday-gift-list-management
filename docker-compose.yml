@@ -1,0 +1,19 @@
+version: '3'
+services:
+  birthday-gift-api:
+    build: 
+      context: ./birthday-gift-api
+      dockerfile: Dockerfile
+    container_name: birthday-gift-api
+    ports:
+      - 3000:3000
+
+  birthday-gift-app:
+    build: 
+      context: ./birthday-gift-app
+      dockerfile: Dockerfile
+    container_name: birthday-gift-app
+    ports:
+      - 4200:80
+    links:
+      - birthday-gift-api

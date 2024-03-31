@@ -53,13 +53,13 @@ export class GiftListComponent implements OnInit {
     if (confirm("Êtes-vous sûr de vouloir supprimer cet élément ?")) {
       // Mettez votre logique de suppression ici
       this.giftService.delete(id)
-      .subscribe(result => {
-        this._snackBar.open(result, '', {
-          duration: 2000,
-          panelClass: ['bg-success']
+        .subscribe(result => {
+          this._snackBar.open(result, '', {
+            duration: 2000,
+            panelClass: ['bg-success']
+          });
+          this.fetchData();
         });
-        this.fetchData();
-      });
       console.log('Suppression confirmée');
     } else {
       console.log('Suppression annulée');
