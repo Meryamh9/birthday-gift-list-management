@@ -26,5 +26,18 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-call",
+      "urls": ["http://localhost:3000/gift",
+      "http://localhost:4200/gift"],
+      "cacheConfig": {
+        "maxAge": "12h",
+        "maxSize": 10,
+        "strategy": "freshness",
+        "timeout": "5s"
+      }
+    }
   ]
 }
