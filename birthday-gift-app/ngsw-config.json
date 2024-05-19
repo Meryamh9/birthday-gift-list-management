@@ -5,6 +5,7 @@
     {
       "name": "app",
       "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
@@ -30,10 +31,12 @@
   "dataGroups": [
     {
       "name": "api-call",
-      "urls": ["http://localhost:3000/gift",
-      "http://localhost:4200/gift"],
+      "urls": [
+        "http://localhost:3000/gift",
+        "http://localhost:4200/**"
+      ],
       "cacheConfig": {
-        "maxAge": "12h",
+        "maxAge": "60d",
         "maxSize": 10,
         "strategy": "freshness",
         "timeout": "5s"
