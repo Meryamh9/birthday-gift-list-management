@@ -45,17 +45,17 @@ Assurez-vous d'avoir Node.js installé sur votre système. Vous pouvez le télé
     ```bash
     cd birthday-gift-app
     ```
-3. **Installez http-server globalement (si vous ne l'avez pas déjà installé) :
+3. **Installez http-server globalement (si vous ne l'avez pas déjà installé)** :
    
    ```bash
     npm install -g http-server
     ```
-4. **Lancez http-server pour servir les fichiers de l'application à partir du répertoire dist :
+4. **Lancez http-server pour servir les fichiers de l'application à partir du répertoire dist** :
 
    ```bash
     http-server -p 8080 -c-1 ./dist/birthday-gift-app/
     ```
-5. **Ouvrez votre navigateur web et accédez à l'URL suivante :
+5. **Ouvrez votre navigateur web et accédez à l'URL suivante** :
    
    http://localhost:8080/
    
